@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan 2 — Loop & Fungsi</title>
+  <style>body{font:16px/1.6 system-ui,sans-serif;max-width:800px;margin:40px auto;padding:0 18px;color:#18313a}section{border:1px solid #dce6e2;border-radius:12px;padding:18px;margin:14px 0}input,button{font:inherit;padding:8px}pre{white-space:pre-wrap;background:#f3f7f5;padding:14px;border-radius:8px}</style>
+</head>
+<body>
+  <h1>Latihan 2: Loop dan Fungsi</h1>
+  <section><h2>Tabel perkalian</h2><label for="multiplier">Angka 1–20:</label> <input id="multiplier" type="number" min="1" max="20" value="7"> <button id="make-table">Buat tabel</button><pre id="table-result"></pre></section>
+  <section><h2>Faktorial</h2><label for="factorial">Bilangan 0–18:</label> <input id="factorial" type="number" min="0" max="18" value="5"> <button id="calc-factorial">Hitung</button><p id="factorial-result"></p></section>
+  <section><h2>Pemeriksaan bilangan prima</h2><label for="prime">Bilangan:</label> <input id="prime" type="number" min="0" value="17"> <button id="check-prime">Periksa</button><p id="prime-result"></p></section>
+  <section><h2>FizzBuzz (1–100)</h2><button id="fizzbuzz">Tampilkan FizzBuzz</button><pre id="fizzbuzz-result"></pre></section>
+  <script>
+    'use strict';
+    function multiplicationTable(number) { const lines = []; for (let i = 1; i <= 10; i++) lines.push(`${number} × ${i} = ${number * i}`); return lines.join('\n'); }
+    function factorial(number) { let result = 1; for (let i = 2; i <= number; i++) result *= i; return result; }
+    function isPrime(number) { if (!Number.isInteger(number) || number < 2) return false; for (let i = 2; i <= Math.sqrt(number); i++) if (number % i === 0) return false; return true; }
+    document.getElementById('make-table').addEventListener('click', () => { const e = document.getElementById('multiplier'); const n = Number(e.value); document.getElementById('table-result').textContent = e.value !== '' && Number.isInteger(n) && n >= 1 && n <= 20 ? multiplicationTable(n) : 'Masukkan bilangan bulat 1–20.'; });
+    document.getElementById('calc-factorial').addEventListener('click', () => { const e = document.getElementById('factorial'); const n = Number(e.value); document.getElementById('factorial-result').textContent = e.value !== '' && Number.isInteger(n) && n >= 0 && n <= 18 ? `${n}! = ${factorial(n)}` : 'Masukkan bilangan bulat 0–18.'; });
+    document.getElementById('check-prime').addEventListener('click', () => { const e = document.getElementById('prime'); const n = Number(e.value); document.getElementById('prime-result').textContent = e.value !== '' && Number.isInteger(n) ? `${n} ${isPrime(n) ? 'adalah' : 'bukan'} bilangan prima.` : 'Masukkan bilangan bulat.'; });
+    document.getElementById('fizzbuzz').addEventListener('click', () => { const lines = []; for (let i = 1; i <= 100; i++) { let word = ''; if (i % 3 === 0) word += 'Fizz'; if (i % 5 === 0) word += 'Buzz'; lines.push(word || i); } document.getElementById('fizzbuzz-result').textContent = lines.join(', '); });
+    document.getElementById('make-table').click(); document.getElementById('calc-factorial').click(); document.getElementById('check-prime').click();
+  </script>
+</body>
+</html>

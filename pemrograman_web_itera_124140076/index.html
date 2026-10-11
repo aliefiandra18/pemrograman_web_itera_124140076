@@ -1,0 +1,119 @@
+<!DOCTYPE html> 
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini POS - Kasir Kantin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-100 p-4 md:p-8 font-sans text-gray-800">
+
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6 text-gray-800 text-center md:text-left">Aplikasi Kasir Mini POS</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Panel Kiri: Form Input Barang -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 h-max custom-shadow">
+                <h2 class="text-xl font-bold mb-4 border-b pb-2">Input Barang</h2>
+
+                <div class="mb-4">
+                    <label for="inputNama" class="block text-sm font-semibold mb-1">Nama Barang</label>
+                    <input type="text" id="inputNama" placeholder="Contoh: Nasi Goreng"
+                        class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    <p id="errNama" class="text-red-500 text-sm mt-1 hidden input-error">❌ Nama barang minimal 3
+                        karakter.</p>
+                </div>
+
+                <div class="mb-4">
+                    <label for="inputHarga" class="block text-sm font-semibold mb-1">Harga Satuan (Rp)</label>
+                    <input type="number" id="inputHarga" placeholder="Contoh: 15000"
+                        class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    <p id="errHarga" class="text-red-500 text-sm mt-1 hidden input-error">❌ Harga minimal Rp 500 (angka
+                        positif).</p>
+                </div>
+
+                <div class="mb-6">
+                    <label for="inputQty" class="block text-sm font-semibold mb-1">Jumlah (Qty)</label>
+                    <input type="number" id="inputQty" value="1" min="1"
+                        class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    <p id="errQty" class="text-red-500 text-sm mt-1 hidden input-error">❌ Jumlah minimal 1.</p>
+                </div>
+
+                <button id="btnTambah"
+                    class="w-full bg-blue-600 text-white font-bold p-3 rounded hover:bg-blue-700 transition duration-200">
+                    + Tambah ke Keranjang
+                </button>
+            </div>
+
+            <!-- Panel Kanan: Keranjang & Pembayaran -->
+            <div
+                class="bg-white p-6 rounded-xl shadow-md border border-gray-200 md:col-span-2 flex flex-col custom-shadow">
+                <h2 class="text-xl font-bold mb-4 border-b pb-2">Keranjang Belanja</h2>
+
+                <div class="overflow-x-auto flex-grow table-container">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100 border-b-2 border-gray-300">
+                                <th class="p-3 text-sm font-semibold whitespace-nowrap">No</th>
+                                <th class="p-3 text-sm font-semibold whitespace-nowrap">Nama Barang</th>
+                                <th class="p-3 text-sm font-semibold whitespace-nowrap">Harga</th>
+                                <th class="p-3 text-sm font-semibold whitespace-nowrap">Qty</th>
+                                <th class="p-3 text-sm font-semibold whitespace-nowrap">Subtotal</th>
+                                <th class="p-3 text-sm font-semibold whitespace-nowrap text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartBody" class="divide-y divide-gray-200">
+                            <!-- Render by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modul Kalkulator Pembayaran -->
+                <div class="mt-6 border-t-2 border-dashed pt-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Total Belanja:</span>
+                            <span id="txtTotalBelanja" class="font-bold text-gray-800">Rp 0</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-600">Diskon (10% jika &ge; 50rb):</span>
+                            <span id="txtDiskon" class="font-bold text-green-600">- Rp 0</span>
+                        </div>
+                        <div class="flex justify-between mt-4 pt-4 border-t border-gray-300">
+                            <span class="text-lg font-bold">Total Akhir:</span>
+                            <span id="txtTotalAkhir" class="text-xl font-black text-blue-600">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="inputBayar" class="block text-sm font-semibold mb-2">Uang Bayar (Rp)</label>
+                        <input type="number" id="inputBayar" placeholder="Nominal bayar..."
+                            class="w-full border border-gray-300 p-3 rounded font-bold text-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                        <p id="msgBayar" class="text-sm mt-1 min-h-[20px]"></p>
+
+                        <div class="flex justify-between items-center mt-4 mb-4">
+                            <span class="text-gray-600 font-semibold">Kembalian:</span>
+                            <span id="txtKembalian" class="text-2xl font-black text-gray-800">Rp 0</span>
+                        </div>
+
+                        <button id="btnReset"
+                            class="w-full bg-red-500 text-white font-bold p-3 rounded hover:bg-red-600 transition duration-200">
+                            Selesaikan Transaksi (Reset)
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

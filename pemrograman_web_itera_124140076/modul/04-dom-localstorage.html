@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan 4 — DOM & LocalStorage</title>
+  <style>body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 18px;color:#18313a}section{border:1px solid #dce6e2;border-radius:12px;padding:18px}input,button{font:inherit;padding:9px}input{width:min(100%,400px)}li{margin:10px 0}li button{margin-left:10px}#message{color:#28785d}</style>
+</head>
+<body>
+  <h1>Latihan 4: DOM dan localStorage</h1>
+  <p>Tambahkan dan hapus tugas. Daftar akan tetap tersedia setelah halaman di-refresh.</p>
+  <section>
+    <form id="todo-form"><label for="todo-input">Tugas baru</label><br><input id="todo-input" type="text" minlength="1" required placeholder="Contoh: Latihan JavaScript"><button type="submit">Tambah</button></form>
+    <p id="message" aria-live="polite"></p><ul id="todo-list"></ul><button id="clear-all" type="button">Hapus semua</button>
+  </section>
+  <script>
+    'use strict';
+    const KEY = 'latihanDomTodo';
+    const form = document.getElementById('todo-form'); const input = document.getElementById('todo-input'); const list = document.getElementById('todo-list'); const message = document.getElementById('message');
+    function loadTodos() { try { const parsed = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(parsed) ? parsed.filter((item) => typeof item === 'string') : []; } catch (error) { console.warn(error); return []; } }
+    let todos = loadTodos();
+    function saveTodos() { localStorage.setItem(KEY, JSON.stringify(todos)); }
+    function renderTodos() { list.replaceChildren(); todos.forEach((todo, index) => { const li = document.createElement('li'); const label = document.createElement('span'); label.textContent = todo; const button = document.createElement('button'); button.type = 'button'; button.textContent = 'Hapus'; button.addEventListener('click', () => { todos.splice(index, 1); saveTodos(); renderTodos(); }); li.append(label, button); list.appendChild(li); }); }
+    form.addEventListener('submit', (event) => { event.preventDefault(); const value = input.value.trim(); if (!value) { message.textContent = 'Tugas tidak boleh kosong.'; return; } todos.push(value); saveTodos(); renderTodos(); input.value = ''; message.textContent = 'Tugas ditambahkan dan disimpan.'; input.focus(); });
+    document.getElementById('clear-all').addEventListener('click', () => { todos = []; saveTodos(); renderTodos(); message.textContent = 'Semua tugas dihapus.'; });
+    renderTodos();
+  </script>
+</body>
+</html>

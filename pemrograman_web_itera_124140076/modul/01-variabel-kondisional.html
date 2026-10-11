@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan 1 — Variabel & Kondisional</title>
+  <style>body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 18px;color:#18313a}section{border:1px solid #dce6e2;border-radius:12px;padding:18px;margin:14px 0}label,input,button{font:inherit}input{padding:8px;width:110px}button{padding:8px 12px;cursor:pointer}pre{white-space:pre-wrap;background:#f3f7f5;padding:14px;border-radius:8px}</style>
+</head>
+<body>
+  <h1>Latihan 1: Variabel dan Kondisional</h1>
+  <p>Contoh penggunaan <code>const</code>, <code>let</code>, if/else, ternary, dan switch-case.</p>
+  <section>
+    <p><strong>Data contoh:</strong> <span id="profile"></span></p>
+    <label for="score">Nilai (0–100):</label> <input id="score" type="number" min="0" max="100" value="85">
+    <button id="check-score">Periksa nilai</button>
+    <p id="score-result" aria-live="polite"></p>
+  </section>
+  <section><h2>Kategori umur</h2><label for="age">Umur:</label> <input id="age" type="number" min="0" value="20"> <button id="check-age">Periksa umur</button><p id="age-result"></p></section>
+  <section><h2>Nama hari dengan switch-case</h2><label for="day">Nomor hari (1–7):</label> <input id="day" type="number" min="1" max="7" value="5"> <button id="check-day">Tampilkan hari</button><p id="day-result"></p></section>
+  <script>
+    'use strict';
+    const nama = 'Aliefiandra Akbar Syahputra';
+    const nim = '124140076';
+    let kotaAsal = 'Isi kota asal'; // Silakan ubah dengan data untuk latihan.
+    document.getElementById('profile').textContent = `${nama} | NIM ${nim} | Kota: ${kotaAsal}`;
+
+    document.getElementById('check-score').addEventListener('click', () => {
+      const score = Number(document.getElementById('score').value);
+      const result = document.getElementById('score-result');
+      if (document.getElementById('score').value === '' || score < 0 || score > 100) { result.textContent = 'Masukkan nilai 0–100.'; return; }
+      const grade = score >= 90 ? 'A' : score >= 80 ? 'B' : score >= 70 ? 'C' : score >= 60 ? 'D' : 'E';
+      const status = score >= 70 ? 'Lulus' : 'Belum lulus';
+      result.textContent = `Nilai ${score}, grade ${grade}: ${status}.`;
+    });
+    document.getElementById('check-age').addEventListener('click', () => {
+      const el = document.getElementById('age'); const age = Number(el.value); let category = '';
+      if (el.value === '' || age < 0) category = 'Masukkan umur yang valid.';
+      else if (age < 12) category = 'Anak'; else if (age <= 17) category = 'Remaja'; else if (age <= 59) category = 'Dewasa'; else category = 'Lansia';
+      document.getElementById('age-result').textContent = category;
+    });
+    document.getElementById('check-day').addEventListener('click', () => {
+      const dayInput = document.getElementById('day'); const number = Number(dayInput.value); let dayName;
+      switch (number) { case 1: dayName = 'Monday'; break; case 2: dayName = 'Tuesday'; break; case 3: dayName = 'Wednesday'; break; case 4: dayName = 'Thursday'; break; case 5: dayName = 'Friday'; break; case 6: dayName = 'Saturday'; break; case 7: dayName = 'Sunday'; break; default: dayName = 'Nomor hari harus 1–7.'; }
+      document.getElementById('day-result').textContent = dayName;
+    });
+  </script>
+</body>
+</html>

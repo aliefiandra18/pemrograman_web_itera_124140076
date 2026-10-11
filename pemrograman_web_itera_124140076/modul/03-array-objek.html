@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan 3 — Array & Objek</title>
+  <style>body{font:15px/1.6 system-ui,sans-serif;max-width:850px;margin:40px auto;padding:0 18px;color:#18313a}table{width:100%;border-collapse:collapse;margin:12px 0}th,td{border-bottom:1px solid #dce6e2;text-align:left;padding:9px}th{background:#f3f7f5}button{padding:8px 12px;margin:6px 6px 6px 0;cursor:pointer}</style>
+</head>
+<body>
+  <h1>Latihan 3: Array dan Objek</h1>
+  <p>Contoh array berisi objek mahasiswa, lalu menampilkan daftar, filter nilai di atas rata-rata, dan pengurutan nama.</p>
+  <div><button id="show-all">Semua mahasiswa</button><button id="above-average">Nilai di atas rata-rata</button><button id="sort-asc">Nama A–Z</button><button id="sort-desc">Nama Z–A</button></div>
+  <p id="average"></p>
+  <table><thead><tr><th>Nama</th><th>NIM contoh</th><th>Jurusan</th><th>Nilai</th></tr></thead><tbody id="students"></tbody></table>
+  <script>
+    'use strict';
+    const students = [
+      { name: 'Alya Putri', nim: '00000001', major: 'Teknik Informatika', score: 88 },
+      { name: 'Bima Pratama', nim: '00000002', major: 'Teknik Elektro', score: 76 },
+      { name: 'Citra Lestari', nim: '00000003', major: 'Teknik Informatika', score: 92 },
+      { name: 'Dimas Saputra', nim: '00000004', major: 'Teknik Sipil', score: 65 },
+      { name: 'Eka Wulandari', nim: '00000005', major: 'Teknik Informatika', score: 81 }
+    ];
+    const average = students.reduce((sum, student) => sum + student.score, 0) / students.length;
+    document.getElementById('average').textContent = `Rata-rata nilai: ${average.toFixed(2)}.`;
+    function render(list) {
+      const body = document.getElementById('students'); body.replaceChildren();
+      list.forEach((student) => { const row = document.createElement('tr'); [student.name, student.nim, student.major, String(student.score)].forEach((value) => { const cell = document.createElement('td'); cell.textContent = value; row.appendChild(cell); }); body.appendChild(row); });
+    }
+    document.getElementById('show-all').addEventListener('click', () => render(students));
+    document.getElementById('above-average').addEventListener('click', () => render(students.filter((student) => student.score > average)));
+    document.getElementById('sort-asc').addEventListener('click', () => render([...students].sort((a, b) => a.name.localeCompare(b.name))));
+    document.getElementById('sort-desc').addEventListener('click', () => render([...students].sort((a, b) => b.name.localeCompare(a.name))));
+    render(students);
+  </script>
+</body>
+</html>
