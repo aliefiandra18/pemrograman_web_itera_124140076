@@ -25,7 +25,7 @@ Tugas Praktikum PAW, Pertemuan 2: JavaScript Next Gen (ES6+).
 
 ## Screenshot
 
-![Tampilan Deadline Radar](screenshot.png)
+![Tampilan Deadline Radar](Screenshot.png)
 
 ## Cara Menjalankan
 
