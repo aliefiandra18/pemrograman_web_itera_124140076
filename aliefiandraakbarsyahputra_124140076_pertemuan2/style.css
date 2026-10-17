@@ -1,0 +1,64 @@
+:root {
+  --bg: #edf1ee; --surface: #fff; --ink: #16302b; --muted: #5b6f6a; --line: #d5ddd9;
+  --brand: #0f766e; --late: #b3261e; --soon: #c26a00; --ok: #0f766e; --calm: #9aaaa6;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); line-height: 1.5; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+/* Header: jam besar + kutipan harian */
+.hero { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end;
+  padding: 2rem clamp(1rem, 5vw, 4rem); background: var(--ink); color: #eaf3f0; }
+.greeting { margin: 0; color: #9fc7bf; font-weight: 600; }
+.clock { margin: 0; font-size: clamp(3.5rem, 10vw, 6.5rem); font-weight: 800; line-height: 1;
+  letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.date { margin: .25rem 0 0; }
+.quote { margin: 0; max-width: 46ch; }
+.quote q { display: block; font-size: 1.1rem; }
+.quote cite { display: block; margin-top: .5rem; color: #9fc7bf; font-style: normal; }
+
+.layout { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;
+  padding: 1.5rem clamp(1rem, 5vw, 4rem); align-items: start; }
+.side { display: grid; gap: 1.5rem; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem; }
+h2 { margin: 0 0 1rem; font-size: 1.15rem; }
+
+/* Form */
+.task-form { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1rem; }
+.task-form label { display: grid; gap: .25rem; font-size: .9rem; font-weight: 600; }
+.task-form label:first-child { grid-column: 1 / -1; }
+input { font: inherit; padding: .55rem .7rem; border: 1px solid var(--line); border-radius: 8px; }
+.actions { display: flex; gap: .5rem; align-items: end; }
+button { font: inherit; cursor: pointer; border-radius: 8px; padding: .5rem .9rem; border: 1px solid var(--line); background: #fff; color: var(--ink); }
+.primary { background: var(--brand); border-color: var(--brand); color: #fff; font-weight: 600; }
+.ghost { background: transparent; padding: .3rem .6rem; font-size: .85rem; }
+.danger { color: var(--late); }
+
+.filters { display: flex; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.filters button.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* Daftar tugas: garis kiri menunjukkan urgensi tenggat */
+.task-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.task { --c: var(--calm); display: grid; grid-template-columns: auto 1fr auto auto; gap: .6rem; align-items: center;
+  padding: .7rem .8rem; border: 1px solid var(--line); border-left: 6px solid var(--c); border-radius: 8px; }
+.task.late { --c: var(--late); } .task.soon { --c: var(--soon); } .task.ok { --c: var(--ok); }
+.task input[type=checkbox] { width: 1.2rem; height: 1.2rem; accent-color: var(--brand); }
+.task-title { margin: 0; font-weight: 600; }
+.task-meta { margin: 0; display: flex; flex-wrap: wrap; gap: .2rem .9rem; font-size: .85rem; color: var(--muted); }
+.task-meta strong { color: var(--c); }
+.task.done .task-title { text-decoration: line-through; color: var(--muted); }
+.empty { color: var(--muted); padding: 1rem 0; }
+
+.bar { height: 10px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.bar span { display: block; height: 100%; width: 0; background: var(--brand); transition: width .4s; }
+.big { margin: 0; font-size: 2.5rem; font-weight: 800; line-height: 1.1; }
+.muted { color: var(--muted); font-size: .85rem; }
+
+@media (max-width: 760px) {
+  .hero, .layout { grid-template-columns: 1fr; }
+  .task { grid-template-columns: auto 1fr; }
+  .task .ghost { justify-self: start; }
+}
+@media (prefers-reduced-motion: reduce) { .bar span { transition: none; } }
