@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deadline Radar - Dashboard Mahasiswa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="hero">
+    <div>
+      <p id="greeting" class="greeting"></p>
+      <p id="clock" class="clock">--:--</p>
+      <p id="date" class="date"></p>
+    </div>
+    <figure id="quote" class="quote">Memuat kutipan...</figure>
+  </header>
+
+  <main class="layout">
+    <section class="panel" aria-labelledby="tugas-judul">
+      <h2 id="tugas-judul">Tugas kuliah</h2>
+      <form id="task-form" class="task-form">
+        <label>Tugas
+          <input name="title" required maxlength="80" placeholder="Laporan praktikum PAW">
+        </label>
+        <label>Mata kuliah
+          <input name="course" maxlength="40" placeholder="Pengembangan Aplikasi Web">
+        </label>
+        <label>Tenggat
+          <input name="deadline" type="date">
+        </label>
+        <div class="actions">
+          <button id="submit-btn" class="primary">Tambah tugas</button>
+          <button id="cancel-edit" type="button" class="ghost" hidden>Batal</button>
+        </div>
+      </form>
+
+      <div id="filters" class="filters" role="group" aria-label="Filter tugas">
+        <button type="button" data-filter="all">Semua</button>
+        <button type="button" data-filter="active">Belum selesai</button>
+        <button type="button" data-filter="done">Selesai</button>
+      </div>
+      <ul id="task-list" class="task-list"></ul>
+    </section>
+
+    <aside class="side">
+      <section class="panel">
+        <h2>Progres</h2>
+        <p id="stats-text"></p>
+        <div class="bar"><span id="stats-bar"></span></div>
+      </section>
+      <section class="panel">
+        <h2>Cuaca di kampus</h2>
+        <div id="weather">Memuat cuaca...</div>
+      </section>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
