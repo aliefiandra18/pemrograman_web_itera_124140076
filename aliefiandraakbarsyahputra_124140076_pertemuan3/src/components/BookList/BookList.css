@@ -1,0 +1,9 @@
+.book-list{list-style:none;margin:0;padding:0;display:grid;gap:.75rem}
+.book{display:grid;grid-template-columns:1fr auto auto;gap:1rem;align-items:center;background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:8px;padding:.8rem 1rem}
+.book--milik{--c:var(--milik)}.book--baca{--c:var(--baca)}.book--beli{--c:var(--beli)}
+.book h3{font-size:1.05rem}
+.book p{margin:0;color:var(--muted);font-size:.9rem}
+.book__status{font-size:.8rem;font-weight:600;color:var(--c)}
+.book__actions{display:flex;gap:.4rem}
+.book-empty{padding:1.5rem;border:1px dashed var(--line);border-radius:8px;color:var(--muted);text-align:center}
+@media(max-width:560px){.book{grid-template-columns:1fr}}
