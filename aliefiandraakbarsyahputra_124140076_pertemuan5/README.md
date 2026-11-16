@@ -8,8 +8,8 @@ Tugas: **Sistem Manajemen Perpustakaan Terpadu Berbasis OOP (Library Management 
 |---|---|
 | Nama Lengkap | Aliefiandra Akbar Syahputra |
 | NIM | 124140076 |
-| Kelas Praktikum | _(isi: RA / RB)_ |
-| Dosen Pengampu / Asisten Praktikum | _(isi nama dosen / asprak)_ |
+| Kelas Praktikum | RA |
+| Asisten Praktikum | Firman H Gultom |
 
 ## Struktur Folder
 
@@ -162,7 +162,7 @@ python 03_inheritance.py
 
 Tempatkan tangkapan layar terminal saat `python main.py` berhasil dijalankan di folder `screenshots/` lalu tampilkan di sini:
 
-<!-- ![Output main.py](screenshots/output_main.png) -->
+![Output main.py](screenshots/output_main.png) 
 
 ## Output Program (`python main.py`)
 
